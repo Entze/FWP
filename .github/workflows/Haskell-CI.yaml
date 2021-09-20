@@ -20,7 +20,7 @@ jobs:
         ghc-version: ['latest', '8.8.4']
         stack-version: ['latest', '2.7.3']
     runs-on: "${{ matrix.os }}"
-    name: "Build - ${{ matrix.os }}"
+    name: "Build - ${{ matrix.os }} - ghc ${{ ghc-version }} - stack ${{ stack-version }}"
     steps:
       - uses: actions/checkout@v2
       - uses: haskell/actions/setup@v1
@@ -38,7 +38,7 @@ jobs:
         ghc-version: ['latest', '8.8.4']
         stack-version: ['latest', '2.7.3']
     runs-on: "${{ matrix.os }}"
-    name: "Test - ${{ matrix.os }}"
+    name: "Test - ${{ matrix.os }} - ghc ${{ ghc-version }} - stack ${{ stack-version }}"
     steps:
       - uses: actions/checkout@v2
       - uses: haskell/actions/setup@v1
