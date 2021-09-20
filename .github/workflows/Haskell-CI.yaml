@@ -1,0 +1,51 @@
+name: Haskell CI
+
+on:
+  push:
+    paths:
+      - "FWP.cabal"
+      - "stack.yaml"
+      - "src/**/*.hs"
+      - "src/**/*.lhs"
+      - "app/**/*.lhs"
+      - "test/**/*.lhs"
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ "ubuntu-20.04", "windows-2019", "macos-11" ]
+        ghc-version: ['latest', '8.8.4']
+        stack-version: ['latest', '2.7.3']
+    runs-on: "${{ matrix.os }}"
+    name: "Build - ${{ matrix.os }}"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: haskell/actions/setup@v1
+        with:
+          ghc-version: ${{ matrix.ghc-version }}
+          # cabal-version: 'latest'. Omitted, but defaults to 'latest'
+          enable-stack: true
+          stack-version: ${{ matrix.stack-version }}
+      - run: stack build
+        shell: bash
+  test:
+    strategy:
+      matrix:
+        os: [ "ubuntu-20.04", "windows-2019", "macos-11" ]
+        ghc-version: ['latest', '8.8.4']
+        stack-version: ['latest', '2.7.3']
+    runs-on: "${{ matrix.os }}"
+    name: "Test - ${{ matrix.os }}"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: haskell/actions/setup@v1
+        with:
+          ghc-version: ${{ matrix.ghc-version }}
+          # cabal-version: 'latest'. Omitted, but defaults to 'latest'
+          enable-stack: true
+          stack-version: ${{ matrix.stack-version }}
+      - run: stack test
+        shell: bash
