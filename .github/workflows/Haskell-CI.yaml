@@ -17,8 +17,8 @@ jobs:
     strategy:
       matrix:
         os: [ "ubuntu-20.04", "windows-2019", "macos-11" ]
-        ghc-version: ['latest', '8.8.4']
-        stack-version: ['latest', '2.7.3']
+        ghc-version: ['latest']
+        stack-version: ['2.7.3']
     runs-on: "${{ matrix.os }}"
     name: "Build - ${{ matrix.os }} - ghc ${{ ghc-version }} - stack ${{ stack-version }}"
     steps:
@@ -35,8 +35,8 @@ jobs:
     strategy:
       matrix:
         os: [ "ubuntu-20.04", "windows-2019", "macos-11" ]
-        ghc-version: ['latest', '8.8.4']
-        stack-version: ['latest', '2.7.3']
+        ghc-version: ['latest']
+        stack-version: ['2.7.3']
     runs-on: "${{ matrix.os }}"
     name: "Test - ${{ matrix.os }} - ghc ${{ ghc-version }} - stack ${{ stack-version }}"
     steps:
